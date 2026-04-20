@@ -2,6 +2,10 @@
 
 A minimal full-stack expense tracker built to demonstrate data correctness, reliability in unreliable network conditions, and foundational API design.
 
+## Live Demo
+* **Frontend (Vercel):** [https://fenmo-six.vercel.app/](https://fenmo-six.vercel.app/)
+* **Backend API (Render):** [https://fenmo-csx5.onrender.com/expenses](https://fenmo-csx5.onrender.com/expenses)
+
 ## Key Design Decisions
 1. **Handling Network Failures (Idempotency):** To solve the issue of users double-clicking submit or the network dropping out, the frontend generates a UUID (`Idempotency-Key`) for every form submission. The SQLite backend checks this key against a `UNIQUE` constraint. If a duplicate request arrives, the API gracefully returns the existing record instead of creating a duplicate charge.
 2. **Handling Money:** Floating-point math is notoriously inaccurate for monetary calculations. The API accepts standard decimal values (e.g., ₹10.50), but strictly converts and stores them as integers representing the smallest currency unit (e.g., 1050 paise/cents) in the SQLite database. The frontend converts it back for display.
