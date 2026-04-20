@@ -24,6 +24,11 @@ db.exec(`
   );
 `);
 
+// GET / (Health Check)
+app.get('/', (req, res) => {
+  res.send('Expense Tracker API is running! Access /expenses to use the API.');
+});
+
 // POST /expenses
 app.post('/expenses', (req, res) => {
   const { amount, category, description, date } = req.body;
